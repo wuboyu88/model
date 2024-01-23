@@ -24,7 +24,11 @@ def bi_var(df, var, bin_num=5, cut_method='qcut', target=None):
 
     pal = sns.light_palette(sns.color_palette()[0], 4)[2]
     plt.figure(figsize=(20, 5))
-    sns.set(style='whitegrid', font_scale=1)
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+    plt.rcParams['axes.unicode_minus'] = False
+    rc = {'font.sans-serif': 'SimHei',
+          'axes.unicode_minus': False}
+    sns.set(style='whitegrid', font_scale=1, rc=rc)
     ax1 = sns.countplot(data=df_var, x=var, color=pal)
     ax1.set_ylabel(ylabel='count')
 
