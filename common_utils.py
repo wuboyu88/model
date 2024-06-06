@@ -246,11 +246,11 @@ def adjust_score(prob, _min_score, _max_score, base_point, pdo):
 def get_ks(y_true, y_pred):
     fpr, tpr, _ = roc_curve(y_true, y_pred)
     ks = (abs(fpr - tpr)).max()
-    return ks
+    return round(ks, 3)
 
 
 def get_auc(y_true, y_pred):
-    return roc_auc_score(y_true, y_pred)
+    return round(roc_auc_score(y_true, y_pred), 3)
 
 
 @contextmanager
@@ -262,10 +262,10 @@ def timer(msg):
     print(f'{msg} done in {elapsed_time / 60:.2f} Min')
 
 
-def get_feature_importance(data, target_name, features, shuffle):
+def get_feature_importance(data, target_name, features, shuffle, random_state=0):
     y = data[target_name].copy()
     if shuffle:
-        y = data[target_name].copy().sample(frac=1.0)
+        y = data[target_name].copy().sample(frac=1.0, random_state=random_state)
 
     lgb_data = lgb.Dataset(data[features], y, free_raw_data=True, silent=True)
 

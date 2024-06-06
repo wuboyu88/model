@@ -147,7 +147,7 @@ null_imp_df = pd.DataFrame()
 nb_runs = 20
 
 for i in tqdm(range(nb_runs)):
-    imp_df = get_feature_importance(df_train, target, features=features_columns, shuffle=True)
+    imp_df = get_feature_importance(df_train, target, features=features_columns, shuffle=True, random_state=i)
     imp_df['run'] = i + 1
     null_imp_df = pd.concat([null_imp_df, imp_df], axis=0)
 
